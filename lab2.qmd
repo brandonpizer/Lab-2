@@ -1,0 +1,110 @@
+---
+title: "Lab2_excercises"
+format: html
+editor: visual
+---
+
+```{r}
+# ctrl+alt+I new code chunk
+
+glimpse(tree_dat)
+
+tree_dat %>% summarize(n=1)
+```
+
+
+```{r}
+#1
+
+glimpse(tree_dat)
+
+```
+
+
+```{r}
+tree_dat %>% 
+  filter(standID == 1) %>%
+  tally()
+```
+
+
+```{r}
+#2
+
+tree_count1 <- tree_dat %>%
+  filter(standID == 1)
+
+
+print(tree_count1)
+
+#answer 
+```
+```{r}
+#3
+
+tree_dat %>%
+  filter(species %in% c("ABBA", "PIST")) %>%
+  count(species)
+
+#answer ABBA=13033 PIST=4188
+
+```
+
+```{r}
+#4
+
+last_year <- max(tree_dat$year, na.rm = TRUE)
+#finding the last year in the data set
+
+tree_dat %>%
+  filter(year == last_year, age > 200) %>%
+  tally() #count trees older than 200 years in last year
+
+#answer 7
+
+```
+
+```{r}
+#5
+tree_dat %>%
+  slice_max(order_by = age, n = 1)
+#this command selects the single row with the highest age. if n = 5 it selects the top 5 rows
+oldest_tree <- tree_dat %>%
+  slice_max(order_by = age, n = 1)
+
+head(oldest_tree)
+
+#answer oldest tree is 269 y/o
+
+```
+```{r}
+
+
+```
+
+
+
+
+
+
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
